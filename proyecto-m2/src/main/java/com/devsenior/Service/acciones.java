@@ -1,5 +1,16 @@
 package com.devsenior.Service;
 
-public class acciones {
+
+public class Acciones {
+
+    Historial historial;
+
+    
+
+    
+
 
 }
+
+
+

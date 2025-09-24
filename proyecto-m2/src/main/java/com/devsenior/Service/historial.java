@@ -1,5 +1,7 @@
 package com.devsenior.Service;
 
-public class historial {
+public class Historial {
+
+
 
 }
