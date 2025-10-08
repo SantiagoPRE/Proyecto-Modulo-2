@@ -74,23 +74,48 @@ public class Historial {
 
     }
 
-    public void mostrarHistorial(Usuario usuario){
-    usuario =sistema.buscarUsuario(usuario.getId(),usuario.getUsername());
+    public void mostrarHistorial(Usuario actual){
+    if (sistema.accionesPermitidas(actual)) {
+    System.out.println("Ingrese el id del usuario del que quiere ver el historial");
+    int id= scanner.nextInt();
+    scanner.nextLine();
+    System.out.println("Ingrese el username del usuario del que quiere ver el historial");
+    String username= scanner.nextLine();
+    usuario =sistema.buscarUsuario(id,username);
         if (usuario == null) {
         System.out.println("Usuario no encontrado.");
         return;
     }
     System.out.println("Historial de: "+usuario.getNombreCompleto());
-       for (Acciones h :usuario.getHistorial().acciones) {
+       for (Acciones h :actual.getHistorial().acciones) {
         if (h!= null) {
             System.out.println(h);  
         }
+       }}
+       else{    
+        if (usuario == null) {
+        System.out.println("Usuario no encontrado.");
+        return;
+    }
+    System.out.println("Este es su historial: "+actual.getNombreCompleto());
+       for (Acciones h :actual.getHistorial().acciones) {
+        if (h!= null) {
+            System.out.println(h);  
        }
     }   
+       }
+    }
 
-    public void agregarAccionAUser(Usuario usuario){
+    public void agregarAccionAUser(Usuario actual){
+
+        if(sistema.accionesPermitidas(actual)){
         int opcion;
-        usuario =sistema.buscarUsuario(usuario.getId(),usuario.getUsername());
+        System.out.println("Ingrese el id del usuario del que desea agregar una accion a su historial");
+        int id= scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Ingrese el username del usuario del que desea agregar una accion a su historial");
+        String username= scanner.nextLine();
+        usuario =sistema.buscarUsuario(id,username);
         if (usuario == null) {
         System.out.println("Usuario no encontrado.");
         return;
@@ -119,9 +144,9 @@ public class Historial {
                     break;
             }
          }while(opcion!=4);
-
-
-
+        }
+        else{System.out.println("No tiene permisos para agregarle una accion al historial de otro usuario");
+    return;}
 
     }
 
