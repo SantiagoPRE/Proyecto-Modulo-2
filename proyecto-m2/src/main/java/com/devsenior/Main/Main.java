@@ -1,13 +1,13 @@
 package com.devsenior.Main;
 
-import com.devsenior.Model.Rol;
-import com.devsenior.Model.Usuario;
+import com.devsenior.ui.vista;
 
 public class Main {
     public static void main(String[] args) {
       
-
-    Usuario usuario = new Usuario("Santiago Preciado", 1, "santpre", "1234", Rol.ADMINISTRADOR);
+    vista vista= new vista();
+    vista.iniciar();
+    
 
 
 

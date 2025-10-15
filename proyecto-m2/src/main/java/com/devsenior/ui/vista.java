@@ -10,21 +10,22 @@ import com.devsenior.Service.SistemaGestion;
 public class vista {
     
     Scanner scanner= new Scanner(System.in);
-
+    
     SistemaGestion sistema= new SistemaGestion();
-    Historial historial= new Historial(null);
+    Historial historial= new Historial(null,sistema);
 
     public void iniciar() {
 
         Usuario admin= new Usuario("Santiago Preciado", 1, "Sa1pre","1234",Rol.ADMINISTRADOR);
+        sistema.agregarUsuario(admin);
         int opcion;
-        Usuario actual= admin;
+        Usuario actual= null;
         System.out.println("Bienvenido al sitema de Gestion de usuarios");
         do {
         System.out.println("""
                 Ingrese el numero de la accion que desea realizar:
                 0.Iniciar sesion
-                1.Crear un usuario}(Solo para Admins)
+                1.Crear un usuario(Solo para Admins)
                 2.Eliminar su informacion del sistema o si es Admin borrar a un usuario
                 3.Actualizar su nombre o su contraseña o si es Admin los datos de otro usuario
                 4.Ver su historial o si es Admin ver el historial de otro usuario
@@ -33,6 +34,7 @@ public class vista {
                 7.Salir
                 """);
         opcion= scanner.nextInt();
+        scanner.nextLine();
         switch (opcion) {
             case 0:
             actual=sistema.iniciarSesión(sistema.ingreseSuUsername(scanner),sistema.ingreseSuContrase(scanner));
@@ -49,7 +51,10 @@ public class vista {
                 System.out.println("Para hacer esta accion primero debe iniciar sesion");
             }
             else{
-            historial.usuarioEliminado(actual);}
+            historial.usuarioEliminado(actual);
+            sistema.cerrarSesion(actual);
+            actual=null;
+            }
                 break;
                 case 3:
                  if (actual== null) {
@@ -86,7 +91,7 @@ public class vista {
             System.out.println("Opcion invalida intente de nuevo");
                 break;
         }
-        } while (opcion==7);
+        } while (opcion!=7);
 
 
 

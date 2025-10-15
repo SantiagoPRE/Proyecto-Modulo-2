@@ -56,8 +56,13 @@ public class SistemaGestion {
         } catch (IllegalArgumentException e) {
             System.out.println("Rol inválido. Debe ser ESTANDAR o ADMINISTRADOR.");
         }}
-            Usuario usuario1 = new Usuario(nombre, id, ingreseSuUsername(scanner), ingreseSuContrase(scanner),rol);
-            System.out.printf("Usuario creado: nombre: %s Id: %d", usuario1.getNombreCompleto(), usuario1.getId());
+            System.out.println("Ingrese el nombre de usuario");
+            String username= scanner.nextLine();
+             System.out.println("Ingrese la contraseña del usuario");
+            String contraseña = scanner.nextLine();
+
+            Usuario usuario1 = new Usuario(nombre, id, username, contraseña ,rol);
+            System.out.printf("Usuario creado: nombre: %s Id: %d %n", usuario1.getNombreCompleto(), usuario1.getId());
             agregarUsuario(usuario1);
             return true;
         } else {
@@ -100,7 +105,7 @@ public class SistemaGestion {
     public Usuario iniciarSesión(String username, String contraseña) {
 
         for (int i = 0; i < usuario.length; i++) {
-            if (username == usuario[i].getUsername() && contraseña == usuario[i].getContraseña()) {
+            if (username.equals(usuario[i].getUsername()) && contraseña.equals(usuario[i].getContraseña())) {
                 Usuario usuarioActual = usuario[i];
                 System.out.println("inicio de sesion exitoso");
                 return usuarioActual;
@@ -155,7 +160,7 @@ public class SistemaGestion {
             for (int i = 0; i < usuario.length; i++) {
                 if (usuario[i] != null && usuario[i].getId() == actual.getId()) {
                     usuario[i] = null;
-                    System.out.println("Se eliminaron sus datos");
+                    System.out.println("Se eliminaron sus datos se cerrara la sesion de su cuenta");
                     return true;
                 }
             }
@@ -200,10 +205,15 @@ public class SistemaGestion {
                             System.out.println("Ingrese el nuevo nombre completo");
                             u.setNombreCompleto(scanner.nextLine());
                             System.out.println("Se cambio el nombre completo");
+                            break;
                         case 2:
                             System.out.println("Ingrese la nueva contraseña");
                             u.setContraseña(scanner.nextLine());
                             System.out.println("Se cambio la contraseña");
+                            break;
+                            case 3:
+                            System.out.println("Saliendo de actualizar informacion");
+                            break;
                         default:
                             System.out.println("Opción no válida");
                             break;
@@ -236,6 +246,9 @@ public class SistemaGestion {
                             System.out.println("Ingrese la nueva contraseña");
                             actual.setContraseña(scanner.nextLine());
                             System.out.println("Se cambio su contraseña");
+                            break;
+                            case 3:
+                            System.out.println("Saliendo");
                             break;
                         default:
                             System.out.println("Opción no válida");

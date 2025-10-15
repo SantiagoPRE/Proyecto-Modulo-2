@@ -15,6 +15,13 @@ public class Acciones {
         this.time = time;
         
     }
+
+
+    @Override
+    public String toString() {
+        return "Accion: "+ descripcion + " | Fecha: " + time + "]";
+    }
+    
     
     
     

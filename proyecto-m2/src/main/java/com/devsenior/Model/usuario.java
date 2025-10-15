@@ -1,28 +1,25 @@
 package com.devsenior.Model;
 
-import com.devsenior.Service.Acciones;
 import com.devsenior.Service.Historial;
 
 public class Usuario {
 
-    private String nombreCompleto;
+    private String nombreCompleto;//Los atributos de la clase usuario
     private int id;
     private String username;
     private String contraseña;
     private Rol rol;
-    private Acciones[] acciones;
     private Historial historial;
 
-    public Usuario(String nombreCompleto, int id, String username, String contraseña,
+    public Usuario(String nombreCompleto, int id, String username, String contraseña,//El constructor de la clase
             Rol rol) {
         this.nombreCompleto = nombreCompleto;
         this.id = id;
         this.username = username;
         this.contraseña = contraseña;
         this.rol = rol;
-        this.acciones = new Acciones[100];
-        this.historial = new Historial();
-
+        this.historial = new Historial(this,null);/*Se llama al constructor de la clase historial que pide un
+         usuario y se le dice que con la palabra this que el usuario que pide es el que se esta creando        */
     }
 
     public String getUsername() {
@@ -61,14 +58,24 @@ public class Usuario {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Acciones[] getAcciones() {
-        return acciones;
-    }
-
     public Historial getHistorial() {
         return historial;
     }
+//Se verifica que el usuario que llame al metodo sea administrador o estandar para poder hacer restricciones
+    public boolean esAdministrador() {
+        if (this.rol == Rol.ADMINISTRADOR) {
+            return true;
 
-    
+        }
+        return false;
+    }
+
+    public boolean esEstandar() {
+        if (this.rol == Rol.ESTANDAR) {
+            return true;
+
+        }
+        return false;
+    }
+
 }
-

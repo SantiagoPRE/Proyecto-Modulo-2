@@ -10,14 +10,15 @@ public class Historial {
 
     Usuario usuario;
     Acciones[] acciones;
+    private SistemaGestion sistema;
 
     Scanner scanner= new Scanner(System.in);
-    SistemaGestion sistema= new SistemaGestion();
 
  
- public Historial(Usuario usuario) {
+ public Historial(Usuario usuario, SistemaGestion sistema) {
         this.usuario = usuario;
         this.acciones = new Acciones[50];
+        this.sistema= sistema;
     }
 
     
@@ -87,7 +88,7 @@ public class Historial {
         return;
     }
     System.out.println("Historial de: "+usuario.getNombreCompleto());
-       for (Acciones h :actual.getHistorial().acciones) {
+       for (Acciones h :usuario.getHistorial().acciones) {
         if (h!= null) {
             System.out.println(h);  
         }
@@ -138,6 +139,9 @@ public class Historial {
                     break;
                 case 3:
                     usuarioActualizado(usuario);
+                    break;
+                    case 4:
+                    System.out.println("Saliendo");
                     break;
                 default:
                     System.out.println("Opcion invalida intente nuevamente");
