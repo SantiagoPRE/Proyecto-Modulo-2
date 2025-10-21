@@ -105,11 +105,13 @@ public class SistemaGestion {
     public Usuario iniciarSesión(String username, String contraseña) {
 
         for (int i = 0; i < usuario.length; i++) {
+
+            if(usuario[i]!= null){
             if (username.equals(usuario[i].getUsername()) && contraseña.equals(usuario[i].getContraseña())) {
                 Usuario usuarioActual = usuario[i];
-                System.out.println("inicio de sesion exitoso");
+                System.out.println("inicio de sesion exitoso de: "+usuarioActual.getUsername());
                 return usuarioActual;
-            }
+            }}
         }
         System.out.println("inicio de sesion fallido");
         return null;
