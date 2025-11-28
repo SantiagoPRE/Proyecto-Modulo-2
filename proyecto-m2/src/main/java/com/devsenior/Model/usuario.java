@@ -17,9 +17,7 @@ public class Usuario {
         this.id = id;
         this.username = username;
         this.contraseña = contraseña;
-        this.rol = rol;
-        this.historial = new Historial(this,null);/*Se llama al constructor de la clase historial que pide un
-         usuario y se le dice que con la palabra this que el usuario que pide es el que se esta creando        */
+        this.rol = rol;     
     }
 
     public String getUsername() {
@@ -61,6 +59,11 @@ public class Usuario {
     public Historial getHistorial() {
         return historial;
     }
+
+    public void setHistorial(Historial historial) {
+        this.historial = historial;
+    }
+    
 //Se verifica que el usuario que llame al metodo sea administrador o estandar para poder hacer restricciones
     public boolean esAdministrador() {
         if (this.rol == Rol.ADMINISTRADOR) {

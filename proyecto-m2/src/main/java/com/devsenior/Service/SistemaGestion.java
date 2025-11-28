@@ -5,6 +5,12 @@ import java.util.Scanner;
 import com.devsenior.Model.Rol;
 import com.devsenior.Model.Usuario;
 
+/**Esta clase se encarga de todo lo relacionado con la gestion de usuarios en el sistema
+ * desde crear, eliminar, actualizar informacion, iniciar y cerrar sesion
+ * tambien tiene metodos para verificar los permisos de los usuarios y tiene 2 metodos 
+ * para ayudar a iniciar sesion y no se usa directamente sino que sus metodos son llamados
+ * en la clase Historial
+ */
 public class SistemaGestion {
 
     Usuario[] usuario;
@@ -60,8 +66,8 @@ public class SistemaGestion {
             String username= scanner.nextLine();
              System.out.println("Ingrese la contraseña del usuario");
             String contraseña = scanner.nextLine();
-
             Usuario usuario1 = new Usuario(nombre, id, username, contraseña ,rol);
+            usuario1.setHistorial(new Historial(this));
             System.out.printf("Usuario creado: nombre: %s Id: %d %n", usuario1.getNombreCompleto(), usuario1.getId());
             agregarUsuario(usuario1);
             return true;
@@ -71,9 +77,9 @@ public class SistemaGestion {
     }
 
     /**
-     * Metodo para buscar un usuario por id o username, verifica si el usuario
+     * Metodo para buscar un usuario por id y username, verifica si el usuario
      * existe y luego
-     * si el id o username coinciden
+     * si el id y username coinciden devulve el usuario
      * 
      * @param id
      * @param username
@@ -81,7 +87,7 @@ public class SistemaGestion {
      */
     public Usuario buscarUsuario(int id, String username) {
         for (int i = 0; i < usuario.length; i++) {
-            if (usuario[i] != null && (usuario[i].getId() == id || usuario[i].getUsername().equals(username))) {
+            if (usuario[i] != null && (usuario[i].getId() == id && usuario[i].getUsername().equals(username))) {
                 System.out.println("Usuario encontrado");
                 return usuario[i];
 
